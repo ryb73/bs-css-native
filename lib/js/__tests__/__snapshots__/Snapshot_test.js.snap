@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`snapshot 1`] = `
+<Text
+  style={
+    Object {
+      "color": "#F0F",
+      "fontSize": 20,
+      "height": "500px",
+    }
+  }
+>
+  test
+</Text>
+`;

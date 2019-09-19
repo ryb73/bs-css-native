@@ -39,7 +39,8 @@ describe("Label", () => {
   );
 
   test("test classname", () =>
-    expect(style([label("theName")])) |> toContainString("theName")
+    expect(style([label("theName")]))
+    |> toEqual({"label": "theName"} |> Obj.magic)
   );
 });
 

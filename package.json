@@ -1,5 +1,5 @@
 {
-  "name": "bs-css",
+  "name": "@ryb73/bs-css-native",
   "version": "10.0.0",
   "description": "BuckleScript bindings for emotion",
   "scripts": {
@@ -8,7 +8,8 @@
     "dev": "parcel example/index.html",
     "start": "bsb -make-world -w",
     "test": "jest",
-    "testw": "jest --watchAll"
+    "testw": "jest --watchAll",
+    "postinstall": "[ ! -f package-links.json ] || ppl link-file"
   },
   "keywords": [
     "emotion",
@@ -20,16 +21,28 @@
   "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/SentiaAnalytics/bs-css.git"
+    "url": "git+https://github.com/ryb73/bs-css-native.git"
   },
   "dependencies": {
-    "emotion": "^10.0.7"
+    "@emotion/native": "^10.0.14"
+  },
+  "peerDependencies": {
+    "bs-platform": "^5.0.0"
   },
   "devDependencies": {
+    "@emotion/core": "^10.0.17",
     "@glennsl/bs-jest": "^0.4.8",
     "bs-platform": "^5.0.0",
+    "bs-react-test-renderer": "^2.0.0",
     "jest": "^24.7.1",
     "parcel-bundler": "^1.12.3",
-    "reason-react": "^0.7.0"
+    "react": "16.8.3",
+    "react-native": "^0.59.0",
+    "react-test-renderer": "16.8.3",
+    "reason-react": "^0.7.0",
+    "reason-react-native": "^0.60.0"
+  },
+  "jest": {
+    "preset": "react-native"
   }
 }

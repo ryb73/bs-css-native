@@ -5,11 +5,14 @@
 *.iml
 /node_modules*
 /lib/bs
-/lib/js/example
+/lib/js/**/*.js
 /example/bundle*.js
 finalOutput/*.js
 npm-debug.log
-*.js
 .merlin
 .nvmrc
 *.log
+.bsb.lock
+
+# persistent-package-linker
+package-links.json

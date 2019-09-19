@@ -5,31 +5,27 @@ include Css_Colors;
 
 type rule =
   | D(string, string) // Declaration
+  | DInt(string, int)
   | S(string, list(rule)) // Selector
   | PseudoClass(string, list(rule))
   | PseudoClassParam(string, string, list(rule));
 
 module Emotion = {
-  type stylename = string;
+  type stylename = ReactNative.Style.t;
   type cache;
 
-  [@bs.module "emotion"] external _make: Js.Json.t => stylename = "css";
-  [@bs.module "emotion"] external cache: cache = "cache";
-  [@bs.module "emotion"]
-  external injectGlobal: Js.Json.t => unit = "injectGlobal";
-  [@bs.module "emotion"]
-  external rawInjectGlobal: string => unit = "injectGlobal";
-  [@bs.module "emotion"]
+  [@bs.module "@emotion/native"]
+  external _make: Js.Json.t => stylename = "css";
+  [@bs.module "@emotion/native"]
   external makeKeyFrames: Js.Dict.t(Js.Json.t) => string = "keyframes";
-  [@bs.module "emotion"] external cx: array(stylename) => stylename = "cx";
-  let mergeStyles: list(stylename) => stylename =
-    stylenames => stylenames |> Array.of_list |> cx;
 
   let rec ruleToDict = (dict, rule) => {
     switch (rule) {
     | D(name, value) when name == "content" =>
       dict->Js.Dict.set(name, Js.Json.string(value == "" ? "\"\"" : value))
     | D(name, value) => dict->Js.Dict.set(name, Js.Json.string(value))
+    | DInt(name, value) =>
+      dict->Js.Dict.set(name, value |> float_of_int |> Js.Json.number)
     | S(name, ruleset) => dict->Js.Dict.set(name, makeJson(ruleset))
     | PseudoClass(name, ruleset) =>
       dict->Js.Dict.set(":" ++ name, makeJson(ruleset))
@@ -170,17 +166,9 @@ include Converter;
 
 type cache = Emotion.cache;
 
-let empty = [];
-let cache = Emotion.cache;
-let merge = Emotion.mergeStyles;
-let global = (selector, rules: list(rule)) =>
-  Emotion.injectGlobal(
-    [(selector, Emotion.makeJson(rules))]
-    ->Js.Dict.fromList
-    ->Js.Json.object_,
-  );
+type stylename = Emotion.stylename;
 
-let insertRule = raw => Emotion.rawInjectGlobal(raw);
+let empty = [];
 
 type animationName = string;
 
@@ -444,14 +432,7 @@ let float = x =>
 
 let fontFamily = x => D("fontFamily", x);
 
-let fontSize = x =>
-  D(
-    "fontSize",
-    switch (x) {
-    | #Length.t as l => Length.toString(l)
-    | #Cascading.t as c => Cascading.toString(c)
-    },
-  );
+let fontSize = x => DInt("fontSize", x);
 
 let fontStyle = x =>
   D(
@@ -1693,42 +1674,6 @@ let bold = `bold;
 let extraBold = `extraBold;
 let lighter = `lighter;
 let bolder = `bolder;
-
-let fontFace = (~fontFamily, ~src, ~fontStyle=?, ~fontWeight=?, ()) => {
-  let fontStyle =
-    Js.Option.map((. value) => FontStyle.toString(value), fontStyle);
-  let src =
-    src
-    |> List.map(
-         fun
-         | `localUrl(value) => {j|local("$(value)")|j}
-         | `url(value) => {j|url("$(value)")|j},
-       )
-    |> String.concat(", ");
-
-  let fontStyle =
-    Belt.Option.mapWithDefault(fontStyle, "", s => "font-style: " ++ s);
-  let fontWeight =
-    Belt.Option.mapWithDefault(fontWeight, "", w =>
-      "font-weight: "
-      ++ (
-        switch (w) {
-        | #FontWeight.t as f => FontWeight.toString(f)
-        | #Cascading.t as c => Cascading.toString(c)
-        }
-      )
-    );
-  let asString = {j|@font-face {
-    font-family: $fontFamily;
-    src: $src;
-    $(fontStyle);
-    $(fontWeight);
-}|j};
-
-  Emotion.rawInjectGlobal(asString);
-
-  fontFamily;
-};
 
 let textDecoration = x =>
   D(

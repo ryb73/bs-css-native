@@ -3,17 +3,13 @@
 module Types = Css_Types;
 
 type rule;
+type stylename = ReactNative.Style.t;
 
 type cache;
 
 let empty: list(rule);
-let merge: list(string) => string;
-let style: list(rule) => string;
+let style: list(rule) => stylename;
 let toJson: list(rule) => Js.Json.t;
-let cache: cache;
-
-let global: (string, list(rule)) => unit;
-let insertRule: string => unit;
 
 let important: rule => rule;
 let label: string => rule;
@@ -360,7 +356,7 @@ let float: [ Types.Float.t | Types.Cascading.t] => rule;
 
 let fontFamily: string => rule;
 
-let fontSize: [ Types.Length.t | Types.Cascading.t] => rule;
+let fontSize: int => rule;
 
 let fontStyle: [ Types.FontStyle.t | Types.Cascading.t] => rule;
 
@@ -1419,16 +1415,6 @@ let filter: list(filter) => rule;
 /**
  * Text
  */
-
-let fontFace:
-  (
-    ~fontFamily: string,
-    ~src: list([< | `localUrl(string) | `url(string)]),
-    ~fontStyle: fontStyle=?,
-    ~fontWeight: [ fontWeight | Types.Cascading.t]=?,
-    unit
-  ) =>
-  string;
 
 let transformOrigin3d:
   (Types.Length.t, Types.Length.t, Types.Length.t) => rule;

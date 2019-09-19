@@ -11,6 +11,6 @@ webpack.config.js
 /example
 /__tests__
 /lib/bs
-/lib/js/example
 /lib/js/__tests__
 /dist
+.bsb.lock

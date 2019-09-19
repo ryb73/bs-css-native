@@ -1,3 +1,6 @@
+Fork of https://github.com/SentiaAnalytics/bs-css binding to `@emotion/native` instead of `emotion`.
+
+
 # bs-css
 
 Statically typed DSL for writing css in reason.
