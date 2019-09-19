@@ -5,6 +5,7 @@
 *.iml
 /node_modules*
 /lib/bs
+/lib/ocaml
 /lib/js/**/*.js
 /example/bundle*.js
 finalOutput/*.js

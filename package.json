@@ -24,13 +24,13 @@
     "url": "git+https://github.com/ryb73/bs-css-native.git"
   },
   "dependencies": {
+    "@emotion/core": "^10.0.17",
     "@emotion/native": "^10.0.14"
   },
   "peerDependencies": {
     "bs-platform": "^5.0.0"
   },
   "devDependencies": {
-    "@emotion/core": "^10.0.17",
     "@glennsl/bs-jest": "^0.4.8",
     "bs-platform": "^5.0.0",
     "bs-react-test-renderer": "^2.0.0",
