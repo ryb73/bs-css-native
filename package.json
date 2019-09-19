@@ -1,6 +1,6 @@
 {
   "name": "@ryb73/bs-css-native",
-  "version": "10.0.0",
+  "version": "0.0.1",
   "description": "BuckleScript bindings for emotion",
   "scripts": {
     "build": "bsb -make-world",
