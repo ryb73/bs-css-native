@@ -1,6 +1,6 @@
 open Jest;
 open Expect;
-open Css;
+open CssNative;
 
 let toBeJson = x => Expect.toBe(x->Js.Json.stringifyAny);
 let r = x => toJson([x]); /* simple rule for more readable tests */

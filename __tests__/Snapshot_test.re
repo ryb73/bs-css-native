@@ -1,6 +1,6 @@
 open Jest;
 open Expect;
-open Css;
+open CssNative;
 open ReactNative;
 
 test("snapshot", () => {
