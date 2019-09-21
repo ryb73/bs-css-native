@@ -1,0 +1,16 @@
+language: node_js
+cache: yarn
+node_js:
+- '11'
+script:
+- yarn build
+- yarn test
+deploy:
+  skip_cleanup: true
+  provider: npm
+  email: rpbiwer@gmail.com
+  on:
+    tags: true
+    branch: master
+  api_key:
+    secure: O0Uh1+Hxw0qwqqQofhw5fnRY0dmKaZ8e+WCq1GBytjzDWYNkOB0saFzynG1WXVKuTeLY8H0FMAvKNLRfi7EojehJlDl2OxJRzNZ6TxBDKWJOWFxIDMW7nK6BCq245G+DjeOizVdul3Wrep6jfK46w+i2NRm7KVOlSfpMqh2AJP0wcc12Q0yd0+StKLkvJSJa7wxODy+QIJz0W1Fz907c95CicdrvczuKFSngAj1YoSURRxwzuvNWKkEUZCHO7vGdxoJYjd2wGnqZ+BMWGeD0BmyunKtqGoKo7ha7URrE4hSTy5gmoVqY/Iup2tkr/abq56ZY55l1z+VdZr6IACsglf1VnppF9B+wzV7yDXi3gCbdyDx0aayKI8fOhujWxh+HRCfO+2YjUFf/tMaOLML1rlyVmYOzLqQWHuTJBFbunlSLT7xM14LV+Hdbnz35YES+REv44ykihDDM+dg/x/QH1hLGHleiy5+GV8TKE51Q2iUJyHqcWSP6ULpjiBEqDi7nPBnLe153JdvfllosFI5E8o9qDxdX9xl163CMdfbpFYoEAsY+k5EdeUDDBAhCjpy9MxVhh23TRrW6VHCXBMXYUoNbnnPYJEeEDl+ZN6FTrWX1YtctR/Cg4DcRyviWLgFVhq6/4r94M8R7mAeu7AhgBVrZJWt+ad22FbewH8BgKYc=
