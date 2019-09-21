@@ -1,6 +1,8 @@
 {
   "name": "@ryb73/bs-css-native",
-  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "version": "0.0.1",
   "description": "BuckleScript bindings for emotion",
   "scripts": {
