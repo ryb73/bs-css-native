@@ -4,9 +4,7 @@
 /dist
 *.iml
 /node_modules*
-/lib/bs
-/lib/ocaml
-/lib/js/**/*.js
+/lib/
 /example/bundle*.js
 finalOutput/*.js
 npm-debug.log
